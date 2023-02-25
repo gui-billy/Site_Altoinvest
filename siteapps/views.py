@@ -1,11 +1,9 @@
-import subprocess
-
 from django.http import HttpResponse
+
+from siteapps.mt5_license import app
 
 
 def home(request):
     return HttpResponse("AltoInvest")
 
-def run_app(request):
-    subprocess.Popen(['python', 'app.py'])
-    return HttpResponse('Python app has been started!')
+
