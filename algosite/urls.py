@@ -1,8 +1,6 @@
-from django.urls import path
-
-from siteapps.views import home, run_app
+from django.urls import include, path
 
 urlpatterns = [
-    path('',home),
-    path('mt5/', run_app),
+    path('', include('siteapps.urls')),
 ]
+
