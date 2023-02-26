@@ -4,7 +4,7 @@ from django.http import JsonResponse
 
 CLIENTS = [
     {"broker": "GenialInvestimentos-PRD", "account": "461035", "exp_date": "2023-05-01"},
-    {"broker": "XPMT5-PRD", "account": "75376", "exp_date": "2023-05-01"}
+    {"broker": "XPMT5-PRD", "account": "75376", "exp_date": "2023-02-01"}
 ]
 
 
