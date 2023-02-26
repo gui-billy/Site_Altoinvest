@@ -1,6 +1,10 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
-from siteapps.mt5_license import app
+from .mt5 import mt5
+
+
+def mt5_view(request):
+    return mt5(request)
 
 
 def home(request):

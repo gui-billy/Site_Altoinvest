@@ -1,9 +1,8 @@
 from django.urls import path
 
-from siteapps.mt5_license import app
-from siteapps.views import home
+from siteapps.views import home, mt5_view
 
 urlpatterns = [
     path('', home),  # Home   
-    path('mt5/', app) 
+    path('mt5/', mt5_view),
 ]
