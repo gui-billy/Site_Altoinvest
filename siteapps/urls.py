@@ -1,8 +1,8 @@
 from django.urls import path
 
-from siteapps.views import home, mt5_view
+from . import views
 
 urlpatterns = [
-    path('', home),  # Home   
-    path('mt5/', mt5_view),
+    path('', views.home),  # Home   
+    path('mt5/', views.mt5_view),
 ]
