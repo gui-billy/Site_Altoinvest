@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from siteapps.utils.projetos.factory import make_robot
+
 from .mt5 import mt5
 
 
@@ -10,6 +12,11 @@ def mt5_view(request):
 
 
 def home(request):
+    return render(request, 'pages/home.html', context={
+        'robot': make_robot(),
+    })
+
+def login(request, id):
     return render(request, 'pages/home.html')
 
 
