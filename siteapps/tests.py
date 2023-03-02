@@ -1,3 +1,6 @@
 from django.test import TestCase
 
-# Create your tests here.
+
+class SiteUrlsTests(TestCase):
+    def test_pytest(self):
+        ...

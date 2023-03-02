@@ -141,6 +141,36 @@ h6 {
     transform: scale(1.02);
 }
 
+.table {
+    display: grid;    
+    grid-gap: 1px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1px;
+    border: 1px solid black;
+}
+
+.cell {
+    border: 1px solid white;
+    padding: 2px;
+}
+
+.header {
+    background-color: gray;
+    color: white;
+}
+
+.cell:nth-child() {
+    background-color: black;
+}
+
+
+
 .search-input,
 .search-button {
     border: none;
