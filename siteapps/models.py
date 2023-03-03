@@ -9,7 +9,7 @@ class Stoploss(models.Model):
         return self.name
 
 
-class usr_algo(models.Model):
+class UsrAlgo(models.Model):
     name = models.CharField(max_length=65, verbose_name=('name'))
     description = models.CharField(max_length=165)
     platform = models.CharField(max_length=65)

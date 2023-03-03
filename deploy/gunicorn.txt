@@ -1,0 +1,75 @@
+###############################################################################
+# Replace
+# site_algotrading to the name of the gunicorn file you want
+# guilh to your user name
+# app_repo to the folder name of your project
+# algosite to the folder name where you find a file called wsgi.py
+#
+###############################################################################
+# Criando o arquivo site_algotrading.socket
+sudo nano /etc/systemd/system/site_algotrading.socket
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=gunicorn blog socket
+
+[Socket]
+ListenStream=/run/site_algotrading.socket
+
+[Install]
+WantedBy=sockets.target
+
+###############################################################################
+# Criando o arquivo site_algotrading.service
+sudo nano /etc/systemd/system/site_algotrading.service
+
+###############################################################################
+# Conteúdo do arquivo
+[Unit]
+Description=Gunicorn daemon (You can change if you want)
+Requires=site_algotrading.socket
+After=network.target
+
+[Service]
+User=guilh
+Group=www-data
+Restart=on-failure
+EnvironmentFile=/home/guilh/app_repo/.env
+WorkingDirectory=/home/guilh/app_repo
+# --error-logfile --enable-stdio-inheritance --log-level and --capture-output
+# are all for debugging purposes.
+ExecStart=/home/guilh/app_repo/venv/bin/gunicorn \
+          --error-logfile /home/guilh/app_repo/gunicorn-error-log \
+          --enable-stdio-inheritance \
+          --log-level "debug" \
+          --capture-output \
+          --access-logfile - \
+          --workers 6 \
+          --bind unix:/run/site_algotrading.socket \
+          algosite.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+###############################################################################
+# Ativando
+sudo systemctl start site_algotrading.socket
+sudo systemctl enable site_algotrading.socket
+
+# Checando
+sudo systemctl status site_algotrading.socket
+curl --unix-socket /run/site_algotrading.socket localhost
+sudo systemctl status site_algotrading
+
+# Restarting
+sudo systemctl restart site_algotrading.service
+sudo systemctl restart site_algotrading.socket
+sudo systemctl restart site_algotrading
+
+# After changing something
+sudo systemctl daemon-reload
+
+# Debugging
+sudo journalctl -u site_algotrading.service
+sudo journalctl -u site_algotrading.socket
